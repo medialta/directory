@@ -15,7 +15,9 @@
 /**
  * Back end modules
  */
-$GLOBALS['TL_LANG']['MOD'][''] = array('', '');
+$GLOBALS['TL_LANG']['MOD']['directory'] = 'Annuaire';
+$GLOBALS['TL_LANG']['MOD']['tl_directory_company'] = array('Entreprises', 'Liste des entreprises de l\'annuaire');
+$GLOBALS['TL_LANG']['MOD']['tl_directory_activity'] = array('Secteurs d\'activité', 'Liste des secteurs d\'activité de l\'annuaire');
 
 
 /**

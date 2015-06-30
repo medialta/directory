@@ -33,4 +33,16 @@ class DirectoryActivityModel extends \Model
 	 */
 	protected static $strTable = 'tl_directory_activity';
 
+	public static function listing()
+	{
+		$listing = [];
+		$results = static::findAll(['order' => 'name']);
+
+		while ($results->next())
+		{
+			$listing[$results->id] = $results->name;
+		}
+
+		return $listing;
+	}
 }

@@ -15,21 +15,20 @@
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['tl_directory_activity']['title'] = array('Title', 'Please enter the title.');
+$GLOBALS['TL_LANG']['tl_directory_activity']['name'] = array('Nom de l\'activité', 'Saisissez le nom de l\'activité.');
 
 
 /**
  * Legends
  */
-$GLOBALS['TL_LANG']['tl_directory_activity']['title_legend'] = 'Title';
+$GLOBALS['TL_LANG']['tl_directory_activity']['activity_infos'] = 'Activité';
 
 
 /**
  * Buttons
  */
-$GLOBALS['TL_LANG']['tl_directory_activity']['new']    = array('New ', 'Create a new ');
-$GLOBALS['TL_LANG']['tl_directory_activity']['show']   = array(' details', 'Show the details of  ID %s');
-$GLOBALS['TL_LANG']['tl_directory_activity']['edit']   = array('Edit ', 'Edit  ID %s');
-$GLOBALS['TL_LANG']['tl_directory_activity']['cut']    = array('Move ', 'Move  ID %s');
-$GLOBALS['TL_LANG']['tl_directory_activity']['copy']   = array('Duplicate ', 'Duplicate  ID %s');
-$GLOBALS['TL_LANG']['tl_directory_activity']['delete'] = array('Delete ', 'Delete  ID %s');
+$GLOBALS['TL_LANG']['tl_directory_activity']['new']    = array('Nouvelle activité ', 'Ajouter une nouvelle activité');
+$GLOBALS['TL_LANG']['tl_directory_activity']['edit']   = array('Éditer l\'activité', 'Éditer l\'activité ID %s');
+$GLOBALS['TL_LANG']['tl_directory_activity']['copy']   = array('Dupliquer l\'activité', 'Dupliquer l\'activité ID %s');
+$GLOBALS['TL_LANG']['tl_directory_activity']['delete'] = array('Supprimer l\'activité', 'Supprimer l\'activité ID %s');
+$GLOBALS['TL_LANG']['tl_directory_activity']['show']   = array('Détails de l\'activité', 'Voir les détails de l\'activité ID %s');
