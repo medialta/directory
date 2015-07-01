@@ -1,0 +1,104 @@
+.directory-list-main-block {
+
+}
+
+.directory-list-block {
+
+}
+
+.directory-list-headline {
+
+}
+
+.directory-list-subheadline {
+
+}
+
+.directory-list-companies {
+    list-style-type: none;
+
+}
+
+.directory-list-company {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+    .directory-list-company:after {
+        content: "";
+        clear: both;
+        display: block;
+        height: 2px;
+        max-width: 100px;
+        background-color: #000;
+    }
+
+    .directory-list-company-logo-block,
+    .directory-list-company-content {
+        float: left;
+    }
+
+    .directory-list-company-logo-block {
+        width: 30%;
+    }
+
+    .directory-list-company-content {
+
+    }
+
+        .directory-list-company-content:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+    .directory-list-company-element {
+
+    }
+
+    .directory-list-company-label {
+        font-weight: bold;
+    }
+
+        .directory-list-company-label:after {
+            content: " : ";
+        }
+
+    .directory-list-company-value {
+
+    }
+
+        .directory-list-company-value.-website {
+            text-transform: none;
+        }
+
+            .directory-list-company-value.-website:before {
+                content: " (";
+            }
+
+            .directory-list-company-value.-website:after {
+                content: ") ";
+            }
+
+            .directory-list-company-website-icon {
+                display: inline-block;
+                vertical-align: baseline;
+                height: 1em;
+                fill: currentColor;
+            }
+
+        .directory-list-company-value.-address::after {
+            content: " - "
+        }
+
+    .directory-list-company address {
+        font-style: normal;
+    }
+
+    .directory-list-company-logo {
+
+    }
+
+    .directory-list-company-name {
+
+    }

@@ -1,8 +1,95 @@
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?= $this->class; ?> directory-list-main-block"<?= $this->cssID; ?><?php if ($this->style): ?> style="<?= $this->style; ?>"<?php endif; ?>>
 
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+    <?php if ($this->headline): ?>
+        <<?= $this->hl; ?> class="directory-list-headline"><?= $this->headline; ?></<?= $this->hl; ?>>
+    <?php endif; ?>
+
+    <div class="directory-list-block -search">
+        <<?= $this->subhl ?> class="directory-list-subheadline -search"><?= $GLOBALS['TL_LANG']['MSC']['directory_search_title'] ?></<?= $this->subhl ?>>
+    </div>
+
+    <div class="directory-list-block -list">
+        <<?= $this->subhl ?> class="directory-list-subheadline -list"><?= $GLOBALS['TL_LANG']['MSC']['directory_list_title'] ?></<?= $this->subhl ?>>
+
+        <ul class="directory-list-companies">
+            <?php while ($this->companies->next()): ?>
+                <li class="directory-list-company">
+
+                    <div class="directory-list-company-logo-block">
+                        <img src="<?= $this->companies->logo ?>" alt="<?= sprintf($GLOBALS['TL_LANG']['MSC']['directory_logo_alt'], $this->companies->corporate_name) ?>" class="directory-list-company-logo">
+                    </div>
+
+                    <div class="directory-list-company-content">
+                        <<?= $this->subsubhl ?> class="directory-list-company-name">
+                            <span class="directory-list-company-value -corporate-name"><?= $this->companies->corporate_name ?></span>
+                            <?php if (strlen($this->companies->website)): ?>
+                                <a href="<?= $this->companies->website ?>" target="_blank" class="directory-list-company-value -website">
+                                    <?= $this->companies->website ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="directory-list-company-website-icon" viewBox="0 0 283.922 283.922"><path d="M266.422 0h-97.625c-9.65 0-17.5 7.85-17.5 17.5s7.85 17.5 17.5 17.5h55.377L131.8 127.374c-3.308 3.305-5.128 7.7-5.128 12.375s1.82 9.068 5.125 12.37c3.306 3.31 7.7 5.13 12.375 5.13 4.674 0 9.07-1.82 12.376-5.127l92.374-92.375v55.377c0 9.65 7.85 17.5 17.5 17.5s17.5-7.85 17.5-17.5V17.5c0-9.65-7.85-17.5-17.5-17.5z"/><path d="M201.137 253.922H30V82.785h128.71l30-30H15c-8.284 0-15 6.716-15 15v201.137c0 8.284 6.716 15 15 15h201.137c8.284 0 15-6.716 15-15V95.212l-30 30v128.71z"/></svg>
+                                </a>
+                            <?php endif; ?>
+                        </<?= $this->subsubhl ?>>
+
+                        <div class="directory-list-company-element -name">
+                            <span class="directory-list-company-label -name"><?= $GLOBALS['TL_LANG']['MSC']['directory_add_by'] ?></span>
+                            <span class="directory-list-company-value -name"><?= $this->companies->name ?></span>,
+                            <span class="directory-list-company-value -job"><?= $this->companies->job ?></span>
+                        </div>
+
+                        <div class="directory-list-company-element -creation-date">
+                            <span class="directory-list-company-label -creation-date"><?= $GLOBALS['TL_LANG']['MSC']['directory_creation_date'] ?></span>
+                            <span class="directory-list-company-value -creation-date"><?= $this->companies->creation_date ?></span>
+                        </div>
+
+                        <address>
+                            <div class="directory-list-company-element -address">
+                                <span class="directory-list-company-label -address"><?= $GLOBALS['TL_LANG']['MSC']['directory_address'] ?></span>
+                                <span class="directory-list-company-value -address"><?= $this->companies->address ?></span>
+                                <span class="directory-list-company-value -zipcode"><?= $this->companies->zipcode ?></span>
+                                <span class="directory-list-company-value -city"><?= $this->companies->city ?></span>
+                            </div>
+
+                            <div class="directory-list-company-element -phone">
+                                <span class="directory-list-company-label -phone"><?= $GLOBALS['TL_LANG']['MSC']['directory_phone'] ?></span>
+                                <a href="tel:<?= $this->companies->unformattedPhone ?>" class="directory-list-company-value -phone"><?= $this->companies->phone ?></a>
+                            </div>
+
+                            <?php if (strlen($this->companies->mobile)): ?>
+                                <div class="directory-list-company-element -mobile">
+                                    <span class="directory-list-company-label -mobile"><?= $GLOBALS['TL_LANG']['MSC']['directory_mobile'] ?></span>
+                                    <a href="tel:<?= $this->companies->unformattedMobile ?>" class="directory-list-company-value -mobile"><?= $this->companies->mobile ?></a>
+                                </div>
+                            <?php endif; ?>
+
+                            <div class="directory-list-company-element -email">
+                                <span class="directory-list-company-label -email"><?= $GLOBALS['TL_LANG']['MSC']['directory_email'] ?></span>
+                                <a href="mailto:<?= $this->companies->email ?>" class="directory-list-company-value -email"><?= $this->companies->email ?></a>
+                            </div>
+                        </address>
+
+                        <div class="directory-list-company-element -activity">
+                            <span class="directory-list-company-label -activity"><?= $GLOBALS['TL_LANG']['MSC']['directory_activity'] ?></span>
+                            <span class="directory-list-company-value -activity"><?= $this->companies->activity ?></span>
+                        </div>
+
+                        <div class="directory-list-company-element -ape-code">
+                            <span class="directory-list-company-label -ape-code"><?= $GLOBALS['TL_LANG']['MSC']['directory_ape_code'] ?></span>
+                            <span class="directory-list-company-value -ape-code"><?= $this->companies->ape_code ?></span>
+                        </div>
+
+                        <blockquote class="directory-list-company-element -description">
+                            <span class="directory-list-company-value -description"><?= $this->companies->description ?></span>
+                        </blockquote>
+                    </div>
+
+                </li>
+            <?php endwhile ?>
+        </ul>
+    </div>
 
 </div>
+
+<style>
+<?php include __DIR__ . '/../assets/directory.css' ?>
+</style>

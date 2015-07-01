@@ -42,3 +42,9 @@ foreach ($GLOBALS['BE_MOD'] as $key => $modules)
 
 $GLOBALS['BE_MOD'] = $newBeMod;
 unset($newBeMod);
+
+// Frontend Modules
+$GLOBALS['FE_MOD']['directory'] = array
+(
+	'directoryList'   => 'ModuleDirectoryList',
+);

@@ -32,7 +32,7 @@ class ModuleDirectoryList extends \Module
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = '';
+	protected $strTemplate = 'mod_directory_list';
 
 
 	/**
@@ -40,6 +40,10 @@ class ModuleDirectoryList extends \Module
 	 */
 	protected function compile()
 	{
+		$hl = (strlen($this->hl)) ? (int)substr($this->hl, 1) : 1;
 
+		$this->Template->subhl = 'h' . ($hl + 1);
+		$this->Template->subsubhl = 'h' . ($hl + 2);
+		$this->Template->companies = \DirectoryCompanyModel::findAllPublished();
 	}
 }
