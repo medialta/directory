@@ -1,8 +1,38 @@
 
-<div class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div class="<?= $this->class; ?> block"<?= $this->cssID; ?><?php if ($this->style): ?> style="<?= $this->style; ?>"<?php endif; ?>>
 
-  <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
-  <?php endif; ?>
+    <?php if ($this->headline): ?>
+        <<?= $this->hl; ?>><?= $this->headline; ?></<?= $this->hl; ?>>
+    <?php endif; ?>
+
+    <?= $this->form ?>
 
 </div>
+
+<style>
+[name=joining_reason]:not(.shown),
+[for=ctrl_joining_reason]:not(.shown) {
+    display: none;
+}
+</style>
+
+<script>
+var $form = jQuery('#<?= $this->formId ?>');
+var $publicField = $form.find('[name="public"]');
+
+$publicField.change(function(e)
+{
+    var $joiningReason = $form.find('[name="joining_reason"], [for="ctrl_joining_reason"]');
+
+    if ($publicField.filter(':checked').val() == '1')
+    {
+        $joiningReason.addClass('shown');
+    }
+    else
+    {
+        $joiningReason.removeClass('shown');
+    }
+});
+
+$publicField.trigger('change');
+</script>

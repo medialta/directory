@@ -25,3 +25,4 @@ $GLOBALS['TL_LANG']['MOD']['tl_directory_activity'] = array('Secteurs d\'activit
  */
 $GLOBALS['TL_LANG']['FMD']['directory'] = 'Annuaire';
 $GLOBALS['TL_LANG']['FMD']['directoryList'] = array('Annuaire - Liste', 'Affiche une liste des éléments de l\'annuaire');
+$GLOBALS['TL_LANG']['FMD']['directoryForm'] = array('Annuaire - Formulaire', 'Affiche un formulaire permetttant d\'ajouter ou modifier un formulaire à l\'annuaire');

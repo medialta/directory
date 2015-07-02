@@ -47,4 +47,5 @@ unset($newBeMod);
 $GLOBALS['FE_MOD']['directory'] = array
 (
 	'directoryList'   => 'ModuleDirectoryList',
+	'directoryForm'   => 'ModuleCompanyForm'
 );
