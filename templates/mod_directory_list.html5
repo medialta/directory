@@ -79,7 +79,7 @@
                         </div>
 
                         <blockquote class="directory-list-company-element -description">
-                            <p class="directory-list-company-value -description"><?= $this->companies->description ?></p>
+                            <p class="directory-list-company-value -description"><?= nl2br($this->companies->description) ?></p>
                         </blockquote>
                     </div>
 
