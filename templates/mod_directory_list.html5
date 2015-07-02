@@ -79,7 +79,7 @@
                         </div>
 
                         <blockquote class="directory-list-company-element -description">
-                            <span class="directory-list-company-value -description"><?= $this->companies->description ?></span>
+                            <p class="directory-list-company-value -description"><?= $this->companies->description ?></p>
                         </blockquote>
                     </div>
 

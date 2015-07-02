@@ -40,10 +40,12 @@
 
     .directory-list-company-logo-block {
         width: 30%;
+        padding-right: 15px;
+        box-sizing: border-box;
     }
 
     .directory-list-company-content {
-
+        width: 70%;
     }
 
         .directory-list-company-content:after {
@@ -55,6 +57,10 @@
     .directory-list-company-element {
 
     }
+
+        .directory-list-company-element.-description {
+            margin-top: 1em;
+        }
 
     .directory-list-company-label {
         font-weight: bold;
@@ -89,6 +95,10 @@
 
         .directory-list-company-value.-address::after {
             content: " - "
+        }
+
+        .directory-list-company-value.-city {
+            font-weight: bold;
         }
 
     .directory-list-company address {
