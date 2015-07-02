@@ -5,7 +5,13 @@
         <<?= $this->hl; ?>><?= $this->headline; ?></<?= $this->hl; ?>>
     <?php endif; ?>
 
-    <?= $this->form ?>
+    <?php if ($this->success): ?>
+        <div class="alert alert-success">
+            <p><?= $GLOBALS['TL_LANG']['MSC']['directory_company_saved'] ?></p>
+        </div>
+    <?php else: ?>
+        <?= $this->form ?>
+    <?php endif; ?>
 
 </div>
 
@@ -17,6 +23,20 @@
 </style>
 
 <script>
+var picker = new Pikaday(
+{
+    field: document.getElementById('ctrl_creation_date'),
+    format: '<?= $this->dateFormat ?>',
+    i18n:
+    {
+        previousMonth : '<?= $GLOBALS['TL_LANG']['MSC']['directory_prev_month'] ?>',
+        nextMonth     : '<?= $GLOBALS['TL_LANG']['MSC']['directory_next_month'] ?>',
+        months        : ['<?= implode('\', \'', $GLOBALS['TL_LANG']['MONTHS']) ?>'],
+        weekdays      : ['<?= implode('\', \'', $GLOBALS['TL_LANG']['DAYS']) ?>'],
+        weekdaysShort : ['<?= implode('\', \'', $GLOBALS['TL_LANG']['DAYS_SHORT']) ?>']
+    }
+});
+
 var $form = jQuery('#<?= $this->formId ?>');
 var $publicField = $form.find('[name="public"]');
 

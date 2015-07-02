@@ -19,6 +19,7 @@ $GLOBALS['TL_LANG']['MSC']['directory_search_title'] = 'Rechercher une entrepris
 $GLOBALS['TL_LANG']['MSC']['directory_list_title'] = 'Liste des entreprises';
 
 $GLOBALS['TL_LANG']['MSC']['directory_no_company'] = 'Aucune entreprise ne correspond à vos critères de recherche.';
+$GLOBALS['TL_LANG']['MSC']['directory_company_saved'] = 'Entreprise enregistrée avec succès.';
 
 $GLOBALS['TL_LANG']['MSC']['directory_search_label'] = 'Nom de l\'entreprise';
 $GLOBALS['TL_LANG']['MSC']['directory_search_activity_label'] = 'Activité de l\'entreprise';
@@ -60,3 +61,6 @@ $GLOBALS['TL_LANG']['MSC']['directory_form_logo'] = 'Logo';
 $GLOBALS['TL_LANG']['MSC']['directory_form_public'] = 'Fiche publique';
 $GLOBALS['TL_LANG']['MSC']['directory_form_joining_reason'] = 'Pourquoi adhérez-vous à la CGPME ?';
 $GLOBALS['TL_LANG']['MSC']['directory_form_submit_label'] = 'Enregistrer l\'entreprise';
+
+$GLOBALS['TL_LANG']['MSC']['directory_next_month'] = 'Mois suivant';
+$GLOBALS['TL_LANG']['MSC']['directory_prev_month'] = 'Mois précédent';
