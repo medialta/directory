@@ -62,18 +62,25 @@ class DirectoryCompanyModel extends \Model
 		}
 	}
 
-	public static function findAllPublished()
+	public static function findAllPublished($arrSearch = [])
 	{
-		return self::findAll([
-			'column' => [
-				'published',
-				'public'
-			],
-			'value' => [
-				1,
-				1
-			]
-		]);
+		$db = \Database::getInstance();
+
+		$query = 'SELECT * FROM ' . self::$strTable . ' WHERE published = 1 AND public = 1';
+		$params = [];
+
+		if (is_array($arrSearch) && !empty($arrSearch))
+		{
+		    foreach ($arrSearch as $column => $value)
+		    {
+		        $query .= ' AND ' . $column . ' LIKE ?';
+				$params[] = '%' . $value . '%';
+		    }
+		}
+
+		$query .= ';';
+
+		return $db->prepare($query)->execute($params);
 	}
 
 	protected static function unformatPhone($phone)
