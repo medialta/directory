@@ -45,6 +45,7 @@ class ModuleCompanyForm extends \Module
 		$GLOBALS['TL_CSS'][] = '/system/modules/directory/assets/pikaday.css';
 
 		$company = new \DirectoryCompanyModel();
+		$firstSave = true;
 
 		$fields = [
 			'name' => [
@@ -157,7 +158,7 @@ class ModuleCompanyForm extends \Module
 		$formId = 'form-search-directory';
 		$doNotSubmit = false;
 		$isPost = \Input::post('FORM_SUBMIT') == $formId;
-		$arrSearch = [];
+		$arrSet = [];
 		$widgets = '';
 
 		foreach ($fields as $name => $field)
@@ -189,6 +190,11 @@ class ModuleCompanyForm extends \Module
 
 		if (!$doNotSubmit && $isPost)
 		{
+			// Save current record empty to get ID
+			$arrSet['id'] = $company->save()->id;
+			$arrSet['tstamp'] = time();
+			$fileDestination = \FilesModel::findByPk($this->directory_logo_folder)->path . '/';
+
 			foreach ($widgets as $widgetName => $widget)
 			{
 				if ($widget->rgxp == 'date')
@@ -197,7 +203,32 @@ class ModuleCompanyForm extends \Module
 				}
 				else if ($widget->type == 'upload' && isset($_SESSION['FILES'][$widgetName]))
 				{
-					$arrSet[$widgetName] = \String::uuidToBin($_SESSION['FILES'][$widgetName]['uuid']);
+
+					if (isset($_SESSION['FILES'][$widgetName]['uuid']))
+					{
+						$arrSet[$widgetName] = \String::uuidToBin($_SESSION['FILES'][$widgetName]['uuid']);
+					}
+					else
+					{
+						$extension = pathinfo($_SESSION['FILES'][$widgetName]['name'])['extension'];
+						$newName = $widgetName . '_' . strtolower($company->id) . '.' . $extension;
+						$_SESSION['FILES'][$widgetName]['name'] = $newName;
+
+						move_uploaded_file($_SESSION['FILES'][$widgetName]['tmp_name'], TL_ROOT . '/' . $fileDestination . $newName);
+
+						$file = new \FilesModel();
+						$file->pid = $this->directory_logo_folder;
+						$file->tstamp = time();
+						$file->type = 'file';
+						$file->path = $fileDestination . $newName;
+						$file->extension = $extension;
+						$file->found = 1;
+						$file->name = $newName;
+						$file->hash = (new \File($file->path))->hash;
+						$file->save();
+
+						$arrSet[$widgetName] = $file->id;
+					}
 				}
 				else if ($widget->type != 'submit')
 				{
@@ -205,14 +236,32 @@ class ModuleCompanyForm extends \Module
 				}
 			}
 
+			$this->import('FrontendUser', 'User');
+			if ($this->User->id)
+			{
+			    $arrSet['member'] = $this->User->id;
+			}
+
 			// Store the result
-			$company->setRow($arrSet)->save();
-			$this->Template->success = true;
+			try
+			{
+				$company->setRow($arrSet)->save();
+				$this->Template->success = true;
+			}
+			catch (Exception $e)
+			{
+				if (!$firstSave)
+				{
+					$company->delete();
+				}
+			    echo $e->getMessage();
+			}
 		}
 
 		$form = new \FrontendTemplate('form');
 		$form->tableless = true;
 		$form->method = 'post';
+		$form->enctype = 'multipart/form-data';
 		$form->formId = $formId;
 		$form->formSubmit = $formId;
 		$form->fields = $widgetsHtml;
@@ -220,6 +269,7 @@ class ModuleCompanyForm extends \Module
 		$this->Template->formId = $formId;
 		$this->Template->form = $form->parse();
 
+		$this->Template->subhl = (strlen($this->hl)) ? 'h' . (int)substr($this->hl, 1) + 1 : 'h2';
 		$this->Template->dateFormat = str_replace(['d', 'm', 'Y'], ['DD', 'MM', 'YYYY'], \Date::getNumericDateFormat());
 	}
 }

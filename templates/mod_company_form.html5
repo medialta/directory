@@ -5,6 +5,8 @@
         <<?= $this->hl; ?>><?= $this->headline; ?></<?= $this->hl; ?>>
     <?php endif; ?>
 
+    
+
     <?php if ($this->success): ?>
         <div class="alert alert-success">
             <p><?= $GLOBALS['TL_LANG']['MSC']['directory_company_saved'] ?></p>
