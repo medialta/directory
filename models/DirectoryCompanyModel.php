@@ -40,8 +40,16 @@ class DirectoryCompanyModel extends \Model
 				return (new \Date($this->arrData['creation_date']))->date;
 				break;
 
+			case 'activity_id':
+				return $this->arrData['activity'];
+				break;
+
 			case 'activity':
 				return \DirectoryActivityModel::findByPk($this->arrData['activity'])->name;
+				break;
+
+			case 'logo_id':
+				return $this->arrData['logo'];
 				break;
 
 			case 'logo':

@@ -44,8 +44,23 @@ class ModuleCompanyForm extends \Module
 		$GLOBALS['TL_JAVASCRIPT'][] = '/system/modules/directory/assets/pikaday.js';
 		$GLOBALS['TL_CSS'][] = '/system/modules/directory/assets/pikaday.css';
 
+		$this->import('FrontendUser', 'User');
 		$company = new \DirectoryCompanyModel();
-		$firstSave = true;
+
+		if (\Input::get('id'))
+		{
+			$company = \DirectoryCompanyModel::findByPk(\Input::get('id'));
+
+			if ($company->member != $this->User->id)
+			{
+				global $objPage;
+				(new \PageError403())->generate($objPage->id);
+			}
+		}
+		else
+		{
+			$firstSave = true;
+		}
 
 		$fields = [
 			'name' => [
@@ -111,7 +126,7 @@ class ModuleCompanyForm extends \Module
 	        'activity' => [
 	            'label'                   => &$GLOBALS['TL_LANG']['MSC']['directory_form_activity'],
 				'inputType'               => 'select',
-				'value'                   => $company->activity,
+				'value'                   => $company->activity_id,
 				'options'                 => \DirectoryActivityModel::listing(),
 				'eval'                    => ['mandatory' => true, 'includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50']
 	        ],
@@ -135,8 +150,8 @@ class ModuleCompanyForm extends \Module
 	        'logo' => [
 	            'label'                   => &$GLOBALS['TL_LANG']['MSC']['directory_form_logo'],
 				'inputType'               => 'upload',
-				'value'                   => $company->logo,
-				'eval'                    => ['extensions' => \Config::get('validImageTypes'), 'mandatory' => true]
+				'value'                   => $company->logo_id,
+				'eval'                    => ['extensions' => \Config::get('validImageTypes'), 'mandatory' => !$company->logo_id]
 	        ],
 	        'public' => [
 	            'label'                   => &$GLOBALS['TL_LANG']['MSC']['directory_form_public'],
@@ -155,7 +170,7 @@ class ModuleCompanyForm extends \Module
 			]
 		];
 
-		$formId = 'form-search-directory';
+		$formId = 'form-edit-directory';
 		$doNotSubmit = false;
 		$isPost = \Input::post('FORM_SUBMIT') == $formId;
 		$arrSet = [];
@@ -236,7 +251,6 @@ class ModuleCompanyForm extends \Module
 				}
 			}
 
-			$this->import('FrontendUser', 'User');
 			if ($this->User->id)
 			{
 			    $arrSet['member'] = $this->User->id;
