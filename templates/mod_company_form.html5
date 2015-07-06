@@ -5,15 +5,43 @@
         <<?= $this->hl; ?>><?= $this->headline; ?></<?= $this->hl; ?>>
     <?php endif; ?>
 
-    
+    <?php if ($this->company->id): ?>
+        <<?= $this->subhl ?> class="directory-form-subheadline -edit"><?= $GLOBALS['TL_LANG']['MSC']['directory_form_companies_title'] ?></<?= $this->subhl ?>>
+
+        <?php if ($this->companies): ?>
+            <ul class="directory-form-companies">
+                <?php while ($this->companies->next()): ?>
+                    <li class="directory-form-companies-element">
+                        <?php if ($this->directory_allow_edit): ?>
+                            <a href="<?= $this->editLink ?>?id=<?= $this->companies->id ?>" class="<?php if ($this->companies->id == $this->company->id): ?>is-active<?php endif; ?>"><?= $this->companies->corporate_name ?></a>
+                        <?php else: ?>
+                            <?= $this->companies->corporate_name ?>
+                        <?php endif; ?>
+
+                        <?php if ($this->directory_allow_delete): ?>
+                            (<a href="<?= $this->editLink ?>?id=<?= $this->companies->id ?>&delete"><?= $GLOBALS['TL_LANG']['MSC']['delete'] ?></a>)
+                        <?php endif; ?>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+
+        <<?= $this->subhl ?> class="directory-form-subheadline -edit"><?= $GLOBALS['TL_LANG']['MSC']['directory_form_edit_title'] ?></<?= $this->subhl ?>>
+        <?php endif; ?>
+    <?php else: ?>
+        <<?= $this->subhl ?> class="directory-form-subheadline -add"><?= $GLOBALS['TL_LANG']['MSC']['directory_form_add_title'] ?></<?= $this->subhl ?>>
+    <?php endif; ?>
 
     <?php if ($this->success): ?>
         <div class="alert alert-success">
             <p><?= $GLOBALS['TL_LANG']['MSC']['directory_company_saved'] ?></p>
         </div>
-    <?php else: ?>
-        <?= $this->form ?>
+    <?php elseif ($this->delete): ?>
+        <div class="alert alert-success">
+            <p><?= $GLOBALS['TL_LANG']['MSC']['directory_company_deleted'] ?></p>
+        </div>
     <?php endif; ?>
+
+    <?= $this->form ?>
 
 </div>
 

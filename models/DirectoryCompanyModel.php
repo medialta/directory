@@ -91,6 +91,11 @@ class DirectoryCompanyModel extends \Model
 		return $db->prepare($query)->execute($params);
 	}
 
+	public static function findAllByMember($memberId)
+	{
+		return self::findBy('member', $memberId);
+	}
+
 	protected static function unformatPhone($phone)
 	{
 		if ($phone[0] == '0')

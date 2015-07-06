@@ -229,7 +229,7 @@ $GLOBALS['TL_DCA']['tl_directory_company'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_directory_company']['description'],
 			'inputType'               => 'textarea',
-			'sql'                     => "text null",
+			'sql'                     => "text NULL",
 			'eval'                    => array()
         ),
         'logo' => array
@@ -251,7 +251,7 @@ $GLOBALS['TL_DCA']['tl_directory_company'] = array
         (
             'label'                   => &$GLOBALS['TL_LANG']['tl_directory_company']['joining_reason'],
 			'inputType'               => 'textarea',
-			'sql'                     => "text null",
+			'sql'                     => "text NULL",
 			'eval'                    => array()
         ),
         'published' => array

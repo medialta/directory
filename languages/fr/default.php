@@ -15,11 +15,15 @@
 /**
  * Miscellaneous
  */
+$GLOBALS['TL_LANG']['MSC']['directory_form_companies_title'] = 'Liste de vos enteprises';
 $GLOBALS['TL_LANG']['MSC']['directory_search_title'] = 'Rechercher une entreprise';
 $GLOBALS['TL_LANG']['MSC']['directory_list_title'] = 'Liste des entreprises';
+$GLOBALS['TL_LANG']['MSC']['directory_form_edit_title'] = 'Édition d\'une entreprise';
+$GLOBALS['TL_LANG']['MSC']['directory_form_add_title'] = 'Ajout d\'une entreprise';
 
 $GLOBALS['TL_LANG']['MSC']['directory_no_company'] = 'Aucune entreprise ne correspond à vos critères de recherche.';
 $GLOBALS['TL_LANG']['MSC']['directory_company_saved'] = 'Entreprise enregistrée avec succès.';
+$GLOBALS['TL_LANG']['MSC']['directory_company_deleted'] = 'Entreprise supprimée avec succès.';
 
 $GLOBALS['TL_LANG']['MSC']['directory_search_label'] = 'Nom de l\'entreprise';
 $GLOBALS['TL_LANG']['MSC']['directory_search_activity_label'] = 'Activité de l\'entreprise';

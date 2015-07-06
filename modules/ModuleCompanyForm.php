@@ -51,7 +51,13 @@ class ModuleCompanyForm extends \Module
 		{
 			$company = \DirectoryCompanyModel::findByPk(\Input::get('id'));
 
-			if ($company->member != $this->User->id)
+			if ($this->directory_allow_delete && isset($_GET['delete']) && $company->member == $this->User->id)
+			{
+			    $company->delete();
+				$company = new \DirectoryCompanyModel();
+				$this->Template->delete = true;
+			}
+			else if (!$this->directory_allow_edit || (!$this->directory_allow_delete || !isset($_GET['delete'])) || $company->member != $this->User->id)
 			{
 				global $objPage;
 				(new \PageError403())->generate($objPage->id);
@@ -280,10 +286,14 @@ class ModuleCompanyForm extends \Module
 		$form->formSubmit = $formId;
 		$form->fields = $widgetsHtml;
 
+		global $objPage;
 		$this->Template->formId = $formId;
 		$this->Template->form = $form->parse();
+		$this->Template->company = $company;
+		$this->Template->companies = \DirectoryCompanyModel::findAllByMember($this->User->id);
+		$this->Template->editLink = '{{link_url::' . $objPage->id . '}}';
 
-		$this->Template->subhl = (strlen($this->hl)) ? 'h' . (int)substr($this->hl, 1) + 1 : 'h2';
+		$this->Template->subhl = (strlen($this->hl)) ? 'h' . ((int)substr($this->hl, 1) + 1) : 'h2';
 		$this->Template->dateFormat = str_replace(['d', 'm', 'Y'], ['DD', 'MM', 'YYYY'], \Date::getNumericDateFormat());
 	}
 }
